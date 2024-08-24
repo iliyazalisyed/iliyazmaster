@@ -1,0 +1,90 @@
+{
+	"name": "dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "exists1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1, source2 exists(source1@Year == source2@Year",
+				"     && source1@Units == source2@Units,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

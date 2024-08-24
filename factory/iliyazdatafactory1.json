@@ -1,0 +1,9 @@
+{
+	"name": "iliyazdatafactory1",
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dc249b50-4947-4418-9fa5-415d041bf155",
+		"tenantId": "76a87053-d582-4780-8666-3f8c8273ee30"
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"name": "eventbasedtrigger",
+	"properties": {
+		"description": "eventbased trigger flow",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline3",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourcefilepath": "triggerbody().folderpath",
+					"sourcefilename": "triggerbody().filename"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/iliyazcontainer1/blobs/input/",
+			"blobPathEndsWith": ".txt",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/c83f7c30-62e8-45fd-b516-c00fa48fb0e9/resourceGroups/resource_group1/providers/Microsoft.Storage/storageAccounts/iliyazstorageaccount1",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}

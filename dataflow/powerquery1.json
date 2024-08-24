@@ -1,0 +1,18 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "annualdataset2",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> annualdataset2",
+					"dataset": {
+						"referenceName": "annualdataset2",
+						"type": "DatasetReference"
+					}
+				}
+			]
+		}
+	}
+}

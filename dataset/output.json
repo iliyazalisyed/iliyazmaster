@@ -1,0 +1,20 @@
+{
+	"name": "output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserviceAzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "done.txt",
+				"folderPath": "output",
+				"container": "iliyazcontainer1"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

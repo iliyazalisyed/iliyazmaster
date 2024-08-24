@@ -1,0 +1,66 @@
+{
+	"name": "emp_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedserviceAzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Employee data.csv",
+				"folderPath": "Emp_data",
+				"container": "iliyazcontainer1"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "gender",
+				"type": "String"
+			},
+			{
+				"name": "bdate",
+				"type": "String"
+			},
+			{
+				"name": "educ",
+				"type": "String"
+			},
+			{
+				"name": "jobcat",
+				"type": "String"
+			},
+			{
+				"name": "salary",
+				"type": "String"
+			},
+			{
+				"name": "salbegin",
+				"type": "String"
+			},
+			{
+				"name": "jobtime",
+				"type": "String"
+			},
+			{
+				"name": "prevexp",
+				"type": "String"
+			},
+			{
+				"name": "minority",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

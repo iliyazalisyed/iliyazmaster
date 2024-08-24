@@ -1,0 +1,21 @@
+{
+	"name": "trigger01",
+	"properties": {
+		"description": "trigger01",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Minute",
+			"interval": 15,
+			"startTime": "2024-08-01T09:00:00Z",
+			"endTime": "2024-08-16T09:00:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}

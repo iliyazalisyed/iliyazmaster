@@ -1,0 +1,114 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "annual_data",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 split(equals(Industry_aggregation_NZSIOC, 'level 1'),",
+				"     equals(Industry_aggregation_NZSIOC, 'level 2'),",
+				"     equals(Industry_aggregation_NZSIOC, 'level 3'),",
+				"     disjoint: true) ~> split1@(industrylevel1, industrylevel2, industrylevel3)",
+				"split1@industrylevel1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"split1@industrylevel2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2",
+				"split1@industrylevel3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Year as string,",
+				"          Industry_aggregation_NZSIOC as string,",
+				"          Industry_code_NZSIOC as string,",
+				"          Industry_name_NZSIOC as string,",
+				"          Units as string,",
+				"          Variable_code as string,",
+				"          Variable_name as string,",
+				"          Variable_category as string,",
+				"          Value as string,",
+				"          Industry_code_ANZSIC06 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink3"
+			]
+		}
+	}
+}

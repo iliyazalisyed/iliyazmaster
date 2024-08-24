@@ -1,0 +1,47 @@
+{
+	"name": "pipeline4",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "deleted",
+						"value": "all the files in tsxt of output got deleted"
+					}
+				],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "output",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "linkedserviceAzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "iliyazcontainer1"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2024-08-17T07:46:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
